@@ -1,0 +1,44 @@
+version: '3.1'
+
+services:
+  zookeeper:
+    image: zookeeper
+    container_name: zookeeper
+    ports:
+      - "2181:2181"
+  kafka:
+    image: wurstmeister/kafka
+    container_name: kafka
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: localhost
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+
+  database:
+    image: postgres
+    restart: always
+    container_name: postgres
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_USER: prabidhi
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: prabidhi_postgres_db
+
+  pgadmin:
+    container_name: pdadmin4_container
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    ports:
+      - "5050:80"
+
+    # to login to pgadmin
+    # connection tab: hostname: 172.22.0.1:5433
+    # username: prabidhi
+    # password: pass
+
+
