@@ -19,9 +19,9 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    private double orderAmount;
-    private String status;
-    private int userId;
+    private String name;
+    private double balance;
+
 
     public static long getSerialVersionUID(){
         return serialVersionUID;
